@@ -3,5 +3,6 @@ node_modules
 out
 .env*.local
 data/messages.json
+data/applications.json
 data/uploads/*
 !data/uploads/.gitkeep

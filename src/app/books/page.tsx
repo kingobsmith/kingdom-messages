@@ -1,3 +1,11 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Books | Kingdom Messages",
+  description: "Books and resources from BJ and the Kingdom Messages ministry.",
+};
+
 const books = [
   {
     title: "The Royal Message",
@@ -29,7 +37,9 @@ export default function BooksPage() {
             </div>
             <h2 className="font-serif text-xl text-gold">{book.title}</h2>
             <p className="mt-2 flex-1 text-sm text-gray-400">{book.description}</p>
-            <button className="btn-gold mt-4 w-full text-sm">Buy</button>
+            <Link href="/apply" className="btn-gold mt-4 w-full text-center text-sm">
+              Request Access
+            </Link>
           </div>
         ))}
       </div>

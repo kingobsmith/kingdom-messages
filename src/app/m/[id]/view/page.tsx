@@ -1,9 +1,23 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import AudioPlayer from "@/components/AudioPlayer";
 import { getMessageById, isMessageExpired } from "@/lib/messages";
 import { getTrackById } from "@/lib/tracks";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const message = getMessageById(id);
+  return {
+    title: message ? `${message.title} | Kingdom Messages` : "Royal Message | Kingdom Messages",
+    description: "Your private Kingdom Message.",
+  };
+}
 
 export default async function MessageViewPage({
   params,

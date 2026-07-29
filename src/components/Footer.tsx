@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+const footerLinks = [
+  { href: "/", label: "Home" },
+  { href: "/kingdom-chamber", label: "Kingdom Chamber" },
+  { href: "/bio", label: "Bio" },
+  { href: "/books", label: "Books" },
+  { href: "/apply", label: "Apply" },
+];
+
 export default function Footer() {
   return (
     <footer className="mt-auto border-t border-gold/20 bg-royal-dark">
@@ -7,22 +15,15 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="font-serif text-gold">Kingdom Messages</p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
-            <Link href="/bio" className="hover:text-gold">
-              Bio
-            </Link>
-            <Link href="/books" className="hover:text-gold">
-              Books
-            </Link>
-            <Link href="/kingdom-chamber" className="hover:text-gold">
-              Kingdom Chamber
-            </Link>
-            <Link href="/apply" className="hover:text-gold">
-              Apply
-            </Link>
+            {footerLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-gold">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
         <p className="mt-4 text-center text-xs text-gray-600">
-          Private, royal communication for pastors, players, stars, and leaders.
+          © {new Date().getFullYear()} Kingdom Messages. Private, royal communication for pastors, players, stars, and leaders.
         </p>
       </div>
     </footer>

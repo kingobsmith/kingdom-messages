@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -9,6 +12,8 @@ const navLinks = [
 ];
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="border-b border-gold/20 bg-royal-black/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
@@ -26,15 +31,31 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <nav className="flex items-center gap-3 md:hidden">
-          <Link href="/kingdom-chamber" className="text-xs text-gray-300 hover:text-gold">
-            Chamber
-          </Link>
-          <Link href="/apply" className="text-xs text-gold hover:text-gold-light">
-            Apply
-          </Link>
-        </nav>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="rounded border border-gold/30 px-3 py-1 text-sm text-gold md:hidden"
+          aria-label="Toggle menu"
+        >
+          Menu
+        </button>
       </div>
+      {open && (
+        <nav className="border-t border-gold/10 px-4 py-3 md:hidden">
+          <div className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="text-sm text-gray-300 hover:text-gold"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

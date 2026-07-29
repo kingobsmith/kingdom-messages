@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kingdom Chamber | Kingdom Messages",
+  description: "A curated network of approved businesses, churches, ministries, speakers, and public leaders.",
+};
 
 const sections = [
   {

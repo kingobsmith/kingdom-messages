@@ -1,20 +1,28 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kingdom Messages | Private Royal Communication",
+  description:
+    "Private royal communication for pastors, players, stars, politicians, and public leaders. Secure messages, QR access, and the Kingdom Chamber.",
+};
 
 const howItWorks = [
-  { step: "1", title: "Create message", desc: "BJ crafts a private royal message with curated music." },
-  { step: "2", title: "Send QR/link", desc: "A unique link and QR code are delivered to the recipient." },
-  { step: "3", title: "Recipient unlocks with code", desc: "Google Authenticator-style code access keeps it secure." },
+  { step: "1", title: "Create secure message", desc: "BJ crafts a private royal message with curated music." },
+  { step: "2", title: "Send private link or QR code", desc: "A unique link and QR code are delivered to the recipient." },
+  { step: "3", title: "Recipient unlocks with authenticator code", desc: "Google Authenticator-style code access keeps it secure." },
   { step: "4", title: "Music plays while they read", desc: "The attached track plays as they receive the message." },
 ];
 
 const audience = [
-  "pastors",
   "churches",
   "ministries",
+  "speaker bureaus",
+  "pastors",
   "athletes",
   "artists",
   "politicians",
-  "public speakers",
+  "public figures",
 ];
 
 const chamberPreview = [
@@ -28,21 +36,23 @@ export default function HomePage() {
     <div>
       <section className="relative overflow-hidden border-b border-gold/20 bg-gradient-to-b from-royal-dark to-royal-black px-4 py-20 md:py-32">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-4 text-sm uppercase tracking-[0.3em] text-gold">Kingdom Messages</p>
           <h1 className="font-serif text-4xl font-bold text-gold md:text-6xl">
             Kingdom Messages
           </h1>
           <p className="mt-4 text-lg text-gray-300 md:text-xl">
-            Private, royal communication for pastors, players, stars, and leaders
-          </p>
-          <p className="mx-auto mt-8 max-w-2xl text-gray-400">
-            Secure message delivery through unique links and QR codes, Google Authenticator-style
-            code access, curated music attached to each message, and the Kingdom Chamber for
-            approved members.
+            Private royal communication for pastors, players, stars, politicians, and public leaders
           </p>
           <p className="mt-8 font-serif text-2xl italic text-gold-light md:text-3xl">
             Private communication with a royal touch.
           </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link href="/apply" className="btn-gold">
+              Apply / Request Invitation
+            </Link>
+            <Link href="/kingdom-chamber" className="btn-outline-gold">
+              Enter Kingdom Chamber
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -94,12 +104,12 @@ export default function HomePage() {
 
       <section className="border-t border-gold/20 bg-royal-dark px-4 py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="section-title mb-4">Request your invitation</h2>
+          <h2 className="section-title mb-4">Ready to join?</h2>
           <p className="mb-8 text-gray-400">
             Join the Kingdom Chamber network or receive private Kingdom Messages.
           </p>
           <Link href="/apply" className="btn-gold">
-            Apply / Request Invitation
+            Apply Now
           </Link>
         </div>
       </section>

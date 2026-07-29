@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Approved Churches & Ministries | Kingdom Chamber",
+  description: "Approved churches and ministries in the Kingdom Chamber network.",
+};
 
 const churches = [
   {
@@ -6,21 +12,18 @@ const churches = [
     leader: "Pastor Michael Thompson",
     location: "Atlanta, GA",
     description: "A Spirit-led congregation committed to community outreach and Kingdom principles.",
-    website: "https://example.com/grace-covenant",
   },
   {
     name: "New Life Ministries International",
     leader: "Bishop Sarah Williams",
     location: "Dallas, TX",
     description: "Approved ministry focused on discipleship, healing, and global missions.",
-    website: "https://example.com/new-life",
   },
   {
     name: "Victory Fellowship",
     leader: "Pastor James Rivera",
     location: "Miami, FL",
     description: "Multicultural church serving families and leaders across South Florida.",
-    website: "https://example.com/victory-fellowship",
   },
 ];
 
@@ -43,14 +46,6 @@ export default function ChurchesPage() {
             <p className="mt-1 text-sm text-gold-light">{church.leader}</p>
             <p className="text-sm text-gray-500">{church.location}</p>
             <p className="mt-3 text-sm text-gray-400">{church.description}</p>
-            <a
-              href={church.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block text-sm text-gold hover:underline"
-            >
-              Visit Website
-            </a>
           </div>
         ))}
       </div>

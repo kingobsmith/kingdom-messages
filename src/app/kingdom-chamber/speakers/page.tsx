@@ -1,24 +1,29 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Speaker Bureaus | Kingdom Chamber",
+  description: "Curated speakers available for churches, conferences, and Kingdom gatherings.",
+};
+
 const speakers = [
   {
     name: "Dr. Angela Foster",
     topics: ["Leadership", "Faith & Culture", "Women in Ministry"],
     bio: "Award-winning speaker and author with 20 years of ministry and corporate leadership experience.",
     media: "The Kingdom Leader, Voices of Faith Podcast",
-    booking: "https://example.com/book-angela",
   },
   {
     name: "Marcus Cole",
     topics: ["Athletics & Faith", "Youth Empowerment", "Motivation"],
     bio: "Former professional athlete turned motivational speaker inspiring the next generation.",
     media: "Game Changer, Rise Up Devotional",
-    booking: "https://example.com/book-marcus",
   },
   {
     name: "Rev. Patricia Hughes",
     topics: ["Worship", "Revival", "Prayer"],
     bio: "Dynamic preacher and worship leader known for powerful messages on spiritual renewal.",
     media: "Fire & Glory, Sacred Hour",
-    booking: "https://example.com/book-patricia",
   },
 ];
 
@@ -47,14 +52,9 @@ export default function SpeakersPage() {
             <p className="mt-3 text-xs text-gray-500">
               Books/Media: {speaker.media}
             </p>
-            <a
-              href={speaker.booking}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline-gold mt-4 inline-block text-sm"
-            >
+            <Link href="/apply" className="btn-outline-gold mt-4 inline-block text-sm">
               Book Speaker
-            </a>
+            </Link>
           </div>
         ))}
       </div>
