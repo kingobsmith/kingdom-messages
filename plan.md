@@ -260,7 +260,7 @@ Do it in this order today and next:
 8. Add track dropdown.
 9. Add audio player.
 10. Build Chamber pages.
-11. Build bio/books/apply pages.
+11. Build bio/books/apply pages.s
 12. After that, replace fake code with real TOTP. [loginradius](https://www.loginradius.com/blog/engineering/what-is-totp-authentication)
 
 So the answer is:
