@@ -1,0 +1,40 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --gold: #c9a227;
+  --gold-light: #e8d48b;
+  --royal-black: #0a0a0a;
+}
+
+body {
+  background-color: var(--royal-black);
+  color: #f5f5f5;
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-md bg-gold px-6 py-3 font-medium text-royal-black transition hover:bg-gold-light;
+  }
+
+  .btn-outline-gold {
+    @apply inline-flex items-center justify-center rounded-md border border-gold px-6 py-3 font-medium text-gold transition hover:bg-gold hover:text-royal-black;
+  }
+
+  .card-royal {
+    @apply rounded-lg border border-gold/20 bg-royal-card p-6 transition hover:border-gold/50;
+  }
+
+  .input-royal {
+    @apply w-full rounded-md border border-gold/30 bg-royal-dark px-4 py-3 text-white placeholder:text-gray-500 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold;
+  }
+
+  .label-royal {
+    @apply mb-2 block text-sm font-medium text-gold-light;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl font-semibold text-gold md:text-4xl;
+  }
+}
