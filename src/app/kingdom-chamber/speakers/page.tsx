@@ -1,33 +1,24 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
+import type { ChamberMember } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Speaker Bureaus | Kingdom Chamber",
   description: "Curated speakers available for churches, conferences, and Kingdom gatherings.",
 };
 
-const speakers = [
-  {
-    name: "Dr. Angela Foster",
-    topics: ["Leadership", "Faith & Culture", "Women in Ministry"],
-    bio: "Award-winning speaker and author with 20 years of ministry and corporate leadership experience.",
-    media: "The Kingdom Leader, Voices of Faith Podcast",
-  },
-  {
-    name: "Marcus Cole",
-    topics: ["Athletics & Faith", "Youth Empowerment", "Motivation"],
-    bio: "Former professional athlete turned motivational speaker inspiring the next generation.",
-    media: "Game Changer, Rise Up Devotional",
-  },
-  {
-    name: "Rev. Patricia Hughes",
-    topics: ["Worship", "Revival", "Prayer"],
-    bio: "Dynamic preacher and worship leader known for powerful messages on spiritual renewal.",
-    media: "Fire & Glory, Sacred Hour",
-  },
-];
+export default async function SpeakersPage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("chamber_members")
+    .select("*")
+    .eq("approved", true)
+    .eq("category", "speaker")
+    .order("featured_order", { ascending: true });
 
-export default function SpeakersPage() {
+  const speakers = (data || []) as ChamberMember[];
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <h1 className="section-title mb-4">Speaker Bureaus</h1>
@@ -38,20 +29,20 @@ export default function SpeakersPage() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {speakers.map((speaker) => (
-          <div key={speaker.name} className="card-royal">
+          <div key={speaker.id} className="card-royal">
             <div className="mb-4 flex h-32 items-center justify-center rounded-lg bg-royal-dark">
               <span className="font-serif text-4xl text-gold/40">
-                {speaker.name.charAt(0)}
+                {speaker.display_name.charAt(0)}
               </span>
             </div>
-            <h2 className="font-serif text-xl text-gold">{speaker.name}</h2>
-            <p className="mt-2 text-xs text-gold-light">
-              {speaker.topics.join(" · ")}
-            </p>
-            <p className="mt-3 text-sm text-gray-400">{speaker.bio}</p>
-            <p className="mt-3 text-xs text-gray-500">
-              Books/Media: {speaker.media}
-            </p>
+            <h2 className="font-serif text-xl text-gold">{speaker.display_name}</h2>
+            {speaker.topics && speaker.topics.length > 0 && (
+              <p className="mt-2 text-xs text-gold-light">{speaker.topics.join(" · ")}</p>
+            )}
+            {speaker.bio && <p className="mt-3 text-sm text-gray-400">{speaker.bio}</p>}
+            {speaker.media_text && (
+              <p className="mt-3 text-xs text-gray-500">Books/Media: {speaker.media_text}</p>
+            )}
             <Link href="/apply" className="btn-outline-gold mt-4 inline-block text-sm">
               Book Speaker
             </Link>

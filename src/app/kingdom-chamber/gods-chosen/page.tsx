@@ -1,33 +1,24 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
+import type { ChamberMember } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Gods Chosen | Kingdom Chamber",
   description: "Invited pastors, politicians, stars, public figures, and speakers in the Kingdom Chamber.",
 };
 
-const members = [
-  {
-    name: "Pastor David King",
-    role: "Senior Pastor, Kingdom Life Church",
-    mission: "Equipping leaders to transform communities through faith and action.",
-    dues: "$50/month",
-  },
-  {
-    name: "Senator Lisa Monroe",
-    role: "Public Servant & Advocate",
-    mission: "Bridging faith and public service for the good of the people.",
-    dues: "$75/month",
-  },
-  {
-    name: 'Marcus "MJ" Johnson',
-    role: "Artist & Kingdom Ambassador",
-    mission: "Using music and media to spread hope and Kingdom values worldwide.",
-    dues: "$100/month",
-  },
-];
+export default async function GodsChosenPage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("chamber_members")
+    .select("*")
+    .eq("approved", true)
+    .eq("category", "gods_chosen")
+    .order("featured_order", { ascending: true });
 
-export default function GodsChosenPage() {
+  const members = (data || []) as ChamberMember[];
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <h1 className="section-title mb-4">Gods Chosen</h1>
@@ -39,26 +30,22 @@ export default function GodsChosenPage() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {members.map((member) => (
-          <div key={member.name} className="card-royal">
+          <div key={member.id} className="card-royal">
             <div className="mb-4 flex h-32 items-center justify-center rounded-lg bg-royal-dark">
               <span className="font-serif text-4xl text-gold/40">
-                {member.name.charAt(0)}
+                {member.display_name.charAt(0)}
               </span>
             </div>
             <span className="inline-block rounded-full border border-gold bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
               Kingdom Approved
             </span>
-            <h2 className="mt-3 font-serif text-xl text-gold">{member.name}</h2>
-            <p className="text-sm text-gold-light">{member.role}</p>
-            <p className="mt-3 text-sm text-gray-400">{member.mission}</p>
-            <p className="mt-4 text-xs text-gray-500">Dues: {member.dues}</p>
+            <h2 className="mt-3 font-serif text-xl text-gold">{member.display_name}</h2>
+            {member.subtitle && <p className="text-sm text-gold-light">{member.subtitle}</p>}
+            {member.bio && <p className="mt-3 text-sm text-gray-400">{member.bio}</p>}
+            {member.dues_text && <p className="mt-4 text-xs text-gray-500">Dues: {member.dues_text}</p>}
             <div className="mt-4 flex flex-wrap gap-2">
-              <Link href="/apply" className="btn-outline-gold text-sm">
-                Request Connection
-              </Link>
-              <Link href="/bio" className="text-sm text-gold hover:underline">
-                Official Links
-              </Link>
+              <Link href="/apply" className="btn-outline-gold text-sm">Request Connection</Link>
+              <Link href="/bio" className="text-sm text-gold hover:underline">Official Links</Link>
             </div>
           </div>
         ))}

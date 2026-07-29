@@ -1,33 +1,24 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
+import type { ChamberMember } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Approved Churches & Ministries | Kingdom Chamber",
   description: "Approved churches and ministries in the Kingdom Chamber network.",
 };
 
-const churches = [
-  {
-    name: "Grace Covenant Church",
-    leader: "Pastor Michael Thompson",
-    location: "Atlanta, GA",
-    description: "A Spirit-led congregation committed to community outreach and Kingdom principles.",
-  },
-  {
-    name: "New Life Ministries International",
-    leader: "Bishop Sarah Williams",
-    location: "Dallas, TX",
-    description: "Approved ministry focused on discipleship, healing, and global missions.",
-  },
-  {
-    name: "Victory Fellowship",
-    leader: "Pastor James Rivera",
-    location: "Miami, FL",
-    description: "Multicultural church serving families and leaders across South Florida.",
-  },
-];
+export default async function ChurchesPage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("chamber_members")
+    .select("*")
+    .eq("approved", true)
+    .in("category", ["church", "ministry"])
+    .order("featured_order", { ascending: true });
 
-export default function ChurchesPage() {
+  const churches = (data || []) as ChamberMember[];
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <h1 className="section-title mb-4">Approved Churches & Ministries</h1>
@@ -38,22 +29,20 @@ export default function ChurchesPage() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {churches.map((church) => (
-          <div key={church.name} className="card-royal">
+          <div key={church.id} className="card-royal">
             <span className="inline-block rounded-full border border-gold/40 px-3 py-1 text-xs text-gold">
               Kingdom Approved
             </span>
-            <h2 className="mt-3 font-serif text-xl text-gold">{church.name}</h2>
-            <p className="mt-1 text-sm text-gold-light">{church.leader}</p>
-            <p className="text-sm text-gray-500">{church.location}</p>
-            <p className="mt-3 text-sm text-gray-400">{church.description}</p>
+            <h2 className="mt-3 font-serif text-xl text-gold">{church.display_name}</h2>
+            {church.subtitle && <p className="mt-1 text-sm text-gold-light">{church.subtitle}</p>}
+            {church.location && <p className="text-sm text-gray-500">{church.location}</p>}
+            {church.bio && <p className="mt-3 text-sm text-gray-400">{church.bio}</p>}
           </div>
         ))}
       </div>
 
       <div className="mt-12 text-center">
-        <Link href="/apply" className="btn-gold">
-          Apply for Approval
-        </Link>
+        <Link href="/apply" className="btn-gold">Apply for Approval</Link>
       </div>
     </div>
   );

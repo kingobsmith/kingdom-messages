@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 export default function UnlockPage() {
   const params = useParams();
   const router = useRouter();
-  const id = params.id as string;
+  const slug = params.slug as string;
 
   const [contact, setContact] = useState("");
   const [code, setCode] = useState("");
@@ -19,10 +19,10 @@ export default function UnlockPage() {
     setError("");
 
     try {
-      const res = await fetch(`/api/messages/${id}/unlock`, {
+      const res = await fetch("/api/message-unlock", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contact, code }),
+        body: JSON.stringify({ slug, emailOrPhone: contact, code }),
       });
 
       const data = await res.json();
@@ -32,7 +32,7 @@ export default function UnlockPage() {
         return;
       }
 
-      router.push(`/m/${id}/view`);
+      router.push(`/m/${slug}/view`);
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -69,7 +69,7 @@ export default function UnlockPage() {
           </div>
 
           <div>
-            <label htmlFor="code" className="label-royal">6-Digit Code</label>
+            <label htmlFor="code" className="label-royal">6-Digit Authenticator Code</label>
             <input
               id="code"
               type="text"

@@ -1,7 +1,8 @@
 node_modules
 .next
 out
-.env*.local
+.env
+.env.local
 data/messages.json
 data/applications.json
 data/uploads/*

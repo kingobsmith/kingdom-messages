@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createApplication } from "@/lib/applications";
-import type { CreateApplicationInput } from "@/lib/applications";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as CreateApplicationInput;
+    const body = await request.json();
 
     if (!body.fullName?.trim()) {
       return NextResponse.json({ error: "Full name is required" }, { status: 400 });
@@ -22,17 +21,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Short statement is required" }, { status: 400 });
     }
 
-    createApplication({
-      fullName: body.fullName.trim(),
+    const admin = createAdminClient();
+    const { error } = await admin.from("applications").insert({
+      full_name: body.fullName.trim(),
       email: body.email.trim(),
       phone: body.phone.trim(),
-      organization: body.organization?.trim() || "",
+      organization_name: body.organization?.trim() || null,
       category: body.category.trim(),
-      statement: body.statement.trim(),
-      kingdomChamber: Boolean(body.kingdomChamber),
-      privateMessages: Boolean(body.privateMessages),
+      short_statement: body.statement.trim(),
+      kingdom_chamber: Boolean(body.kingdomChamber),
+      private_messages: Boolean(body.privateMessages),
     });
 
+    if (error) throw error;
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to submit application" }, { status: 500 });

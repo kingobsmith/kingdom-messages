@@ -9,18 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.1",
+    "nanoid": "^5.0.9",
     "next": "^15.1.0",
+    "otplib": "^12.0.1",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "uuid": "^11.0.3"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/uuid": "^10.0.0",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.1.0",
     "postcss": "^8.4.49",
