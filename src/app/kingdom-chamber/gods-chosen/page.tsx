@@ -20,12 +20,12 @@ export default async function GodsChosenPage() {
   const members = (data || []) as ChamberMember[];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="mx-auto max-w-6xl px-4 py-12 pb-24 md:pb-12">
       <h1 className="section-title mb-4">Gods Chosen</h1>
       <p className="mb-10 max-w-2xl text-gray-400">
         Gods Chosen is an exclusive network of invited or approved pastors, politicians, stars,
-        public figures, and speakers. Each member carries the Kingdom Approved designation.
-        Membership dues never exceed $100/month and support the Kingdom Chamber mission.
+        public figures, and speakers. Each profile includes name, bio, mission, platform links,
+        and approved status. Membership dues never exceed $100/month.
       </p>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -37,18 +37,46 @@ export default async function GodsChosenPage() {
               </span>
             </div>
             <span className="inline-block rounded-full border border-gold bg-gold/10 px-3 py-1 text-xs font-medium text-gold">
-              Kingdom Approved
+              Kingdom Approved · Invited
             </span>
             <h2 className="mt-3 font-serif text-xl text-gold">{member.display_name}</h2>
-            {member.subtitle && <p className="text-sm text-gold-light">{member.subtitle}</p>}
-            {member.bio && <p className="mt-3 text-sm text-gray-400">{member.bio}</p>}
-            {member.dues_text && <p className="mt-4 text-xs text-gray-500">Dues: {member.dues_text}</p>}
+            {member.subtitle && (
+              <p className="text-sm text-gold-light">{member.subtitle}</p>
+            )}
+            {member.bio && (
+              <div className="mt-3">
+                <p className="text-xs uppercase tracking-wide text-gray-500">Mission Statement</p>
+                <p className="mt-1 text-sm text-gray-400">{member.bio}</p>
+              </div>
+            )}
+            {member.dues_text && (
+              <p className="mt-4 text-xs text-gray-500">
+                Monthly dues: {member.dues_text} (never more than $100/month)
+              </p>
+            )}
             <div className="mt-4 flex flex-wrap gap-2">
-              <Link href="/apply" className="btn-outline-gold text-sm">Request Connection</Link>
-              <Link href="/bio" className="text-sm text-gold hover:underline">Official Links</Link>
+              <Link href="/contact" className="btn-outline-gold text-sm">Request Connection</Link>
+              {member.official_link ? (
+                <a
+                  href={member.official_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gold hover:underline"
+                >
+                  Platform Links
+                </a>
+              ) : (
+                <Link href="/contact" className="text-sm text-gold hover:underline">
+                  Platform Links
+                </Link>
+              )}
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-12 text-center">
+        <Link href="/contact" className="btn-gold">Apply for Gods Chosen</Link>
       </div>
     </div>
   );

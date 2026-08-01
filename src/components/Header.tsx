@@ -5,10 +5,10 @@ import { useState } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/kingdom-chamber", label: "Kingdom Chamber" },
   { href: "/bio", label: "Bio" },
   { href: "/books", label: "Books" },
-  { href: "/apply", label: "Apply" },
+  { href: "/kingdom-chamber", label: "Kingdom Chamber" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -31,14 +31,17 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="rounded border border-gold/30 px-3 py-1 text-sm text-gold md:hidden"
-          aria-label="Toggle menu"
-        >
-          Menu
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <Link href="/contact" className="text-xs text-gold">Contact</Link>
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="rounded border border-gold/30 px-3 py-1 text-sm text-gold"
+            aria-label="Toggle menu"
+          >
+            Menu
+          </button>
+        </div>
       </div>
       {open && (
         <nav className="border-t border-gold/10 px-4 py-3 md:hidden">

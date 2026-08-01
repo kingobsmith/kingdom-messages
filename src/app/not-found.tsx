@@ -18,8 +18,8 @@ export default function NotFound() {
         <Link href="/" className="btn-gold">
           Go Home
         </Link>
-        <Link href="/apply" className="btn-outline-gold">
-          Apply / Request Invitation
+        <Link href="/contact" className="btn-outline-gold">
+          Contact / Request
         </Link>
       </div>
     </div>

@@ -79,12 +79,9 @@ export default function BioPage() {
         </section>
 
         <div className="flex flex-wrap gap-4">
-          <Link href="/books" className="btn-outline-gold">
-            View Books
-          </Link>
-          <Link href="/kingdom-chamber" className="btn-gold">
-            Enter Kingdom Chamber
-          </Link>
+          <Link href="/books" className="btn-outline-gold">View Books</Link>
+          <Link href="/kingdom-chamber" className="btn-gold">Enter Kingdom Chamber</Link>
+          <Link href="/contact" className="btn-outline-gold">Request a Message</Link>
         </div>
       </div>
     </div>

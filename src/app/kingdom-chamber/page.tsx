@@ -20,13 +20,13 @@ const sections = [
   {
     title: "Gods Chosen",
     href: "/kingdom-chamber/gods-chosen",
-    desc: "Invited pastors, politicians, stars, and public figures in the Kingdom.",
+    desc: "Celebrities, politicians, pastors, and public figures — invited and Kingdom Approved.",
   },
 ];
 
 export default function KingdomChamberPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="mx-auto max-w-6xl px-4 py-12 pb-24 md:pb-12">
       <div className="mb-12 text-center">
         <h1 className="section-title">Kingdom Chamber</h1>
         <p className="mx-auto mt-6 max-w-2xl text-gray-400">
@@ -43,6 +43,18 @@ export default function KingdomChamberPage() {
             <span className="mt-4 inline-block text-sm text-gold-light">View listings →</span>
           </Link>
         ))}
+      </div>
+
+      <div className="card-royal mt-10">
+        <h2 className="font-serif text-xl text-gold">Public Figures Lane</h2>
+        <p className="mt-3 text-sm text-gray-400">
+          A dedicated lane within Gods Chosen for celebrities, politicians, pastors, and public
+          figures to build approved profiles with mission statements, platform links, and Kingdom
+          Approved status. Dues never exceed $100/month.
+        </p>
+        <Link href="/kingdom-chamber/gods-chosen" className="btn-outline-gold mt-4 inline-block text-sm">
+          Explore Gods Chosen
+        </Link>
       </div>
     </div>
   );

@@ -68,6 +68,18 @@ create table if not exists applications (
   created_at timestamptz not null default now()
 );
 
+create table if not exists contact_requests (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  email text not null,
+  phone text not null,
+  who_are_you text not null,
+  request_type text not null,
+  budget text,
+  message_details text not null,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists chamber_members (
   id uuid primary key default gen_random_uuid(),
   category text not null check (category in ('church', 'ministry', 'speaker', 'gods_chosen', 'business')),
@@ -95,15 +107,23 @@ alter table recipients enable row level security;
 alter table messages enable row level security;
 alter table message_access_logs enable row level security;
 alter table applications enable row level security;
+alter table contact_requests enable row level security;
 alter table chamber_members enable row level security;
 
+drop policy if exists "profiles read own" on profiles;
 create policy "profiles read own" on profiles for select using (auth.uid() = id);
 
+drop policy if exists "tracks public read" on tracks;
 create policy "tracks public read" on tracks for select using (active = true);
 
+drop policy if exists "chamber public read" on chamber_members;
 create policy "chamber public read" on chamber_members for select using (approved = true);
 
+drop policy if exists "applications insert" on applications;
 create policy "applications insert" on applications for insert with check (true);
+
+drop policy if exists "contact insert" on contact_requests;
+create policy "contact insert" on contact_requests for insert with check (true);
 
 create or replace function public.handle_new_user()
 returns trigger

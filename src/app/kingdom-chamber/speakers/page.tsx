@@ -43,7 +43,7 @@ export default async function SpeakersPage() {
             {speaker.media_text && (
               <p className="mt-3 text-xs text-gray-500">Books/Media: {speaker.media_text}</p>
             )}
-            <Link href="/apply" className="btn-outline-gold mt-4 inline-block text-sm">
+            <Link href="/contact" className="btn-outline-gold mt-4 inline-block text-sm">
               Book Speaker
             </Link>
           </div>

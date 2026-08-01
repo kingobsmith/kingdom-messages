@@ -23,10 +23,13 @@ const books = [
 
 export default function BooksPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="mx-auto max-w-6xl px-4 py-12 pb-24 md:pb-12">
       <h1 className="section-title mb-4">Books</h1>
-      <p className="mb-10 max-w-2xl text-gray-400">
+      <p className="mb-4 max-w-2xl text-gray-400">
         Explore books and resources from BJ and the Kingdom Messages ministry.
+      </p>
+      <p className="mb-10 max-w-2xl text-sm text-gray-500">
+        Where to Buy Books — purchase requests and availability are handled through our contact team.
       </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,8 +40,8 @@ export default function BooksPage() {
             </div>
             <h2 className="font-serif text-xl text-gold">{book.title}</h2>
             <p className="mt-2 flex-1 text-sm text-gray-400">{book.description}</p>
-            <Link href="/apply" className="btn-gold mt-4 w-full text-center text-sm">
-              Request Access
+            <Link href="/contact" className="btn-gold mt-4 w-full text-center text-sm">
+              Buy Books
             </Link>
           </div>
         ))}

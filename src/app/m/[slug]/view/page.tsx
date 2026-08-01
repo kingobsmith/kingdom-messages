@@ -108,9 +108,9 @@ export default async function MessageViewPage({
 
       <div className="mt-12 flex flex-wrap justify-center gap-4 border-t border-gold/20 pt-8 text-sm">
         <Link href="/bio" className="text-gray-400 hover:text-gold">Bio</Link>
-        <Link href="/books" className="text-gray-400 hover:text-gold">Books</Link>
+        <Link href="/books" className="text-gray-400 hover:text-gold">Buy Books</Link>
         <Link href="/kingdom-chamber" className="text-gray-400 hover:text-gold">Kingdom Chamber</Link>
-        <Link href="/apply" className="text-gray-400 hover:text-gold">Apply</Link>
+        <Link href="/contact" className="text-gray-400 hover:text-gold">Request / Contact</Link>
       </div>
     </div>
   );

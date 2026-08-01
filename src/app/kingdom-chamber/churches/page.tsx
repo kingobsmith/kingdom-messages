@@ -42,7 +42,7 @@ export default async function ChurchesPage() {
       </div>
 
       <div className="mt-12 text-center">
-        <Link href="/apply" className="btn-gold">Apply for Approval</Link>
+        <Link href="/contact" className="btn-gold">Apply for Approval</Link>
       </div>
     </div>
   );
