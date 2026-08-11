@@ -5,4 +5,6 @@ export const metadata: Metadata = {
   description: "Request a private Kingdom Message, booking, or consultation.",
 };
 
-export { default } from "./ContactForm";
+export default function ContactLayout({ children }: { children: React.ReactNode }) {
+  return children;
+}

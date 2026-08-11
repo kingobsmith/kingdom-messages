@@ -67,6 +67,7 @@ export default function MessagesListPage() {
         <h1 className="section-title">Messages</h1>
         <div className="flex flex-wrap gap-3">
           <Link href="/admin/recipients" className="btn-outline-gold text-sm">Recipients</Link>
+          <Link href="/admin/proposals" className="btn-outline-gold text-sm">Proposals</Link>
           <Link href="/admin/chamber-members" className="btn-outline-gold text-sm">Chamber</Link>
           <Link href="/admin/messages/new" className="btn-gold text-sm">New Message</Link>
           <button type="button" onClick={handleLogout} className="text-sm text-gray-400 hover:text-gold">

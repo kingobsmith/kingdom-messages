@@ -69,3 +69,43 @@ export interface Application {
   private_messages: boolean;
   created_at: string;
 }
+
+export interface Proposal {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  letter_body: string;
+  executive_summary: string | null;
+  pdf_path: string | null;
+  status: "draft" | "active" | "archived";
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProposalAccess {
+  id: string;
+  proposal_id: string;
+  organization_name: string;
+  contact_name: string | null;
+  contact_email: string | null;
+  contact_phone: string | null;
+  access_code: string;
+  status: "sent" | "opened" | "replied" | "meeting_requested" | "revoked";
+  notes: string | null;
+  created_at: string;
+  last_opened_at: string | null;
+}
+
+export interface ProposalReply {
+  id: string;
+  proposal_id: string;
+  access_id: string | null;
+  reply_type: "conversation" | "forward" | "general";
+  full_name: string;
+  email: string;
+  phone: string | null;
+  organization: string | null;
+  message: string;
+  created_at: string;
+}
