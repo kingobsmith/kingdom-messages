@@ -10,11 +10,11 @@ async function safeList(table: string, columns = "*", limit = 8) {
     .order("created_at", { ascending: false })
     .limit(limit);
 
-  if (error) {
-    return { rows: [] as Record<string, unknown>[], count: 0 };
+  if (error || !data) {
+    return { rows: [], count: 0 };
   }
 
-  return { rows: (data || []) as Record<string, unknown>[], count: count || 0 };
+  return { rows: data as unknown as unknown[], count: count || 0 };
 }
 
 export async function GET() {
