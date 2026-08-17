@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 interface Recipient {
   id: string;
@@ -70,9 +69,6 @@ export default function RecipientsPage() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="section-title">Recipients</h1>
         <div className="flex gap-3">
-          <Link href="/admin/messages" className="btn-outline-gold text-sm">
-            Messages
-          </Link>
           <button type="button" onClick={() => setShowForm(!showForm)} className="btn-gold text-sm">
             {showForm ? "Cancel" : "New Recipient"}
           </button>

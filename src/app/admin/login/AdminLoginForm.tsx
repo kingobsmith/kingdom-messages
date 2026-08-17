@@ -26,7 +26,7 @@ export default function AdminLoginForm() {
       return;
     }
 
-    const redirect = searchParams.get("redirect") || "/admin/messages";
+    const redirect = searchParams.get("redirect") || "/admin";
     router.push(redirect);
     router.refresh();
   }

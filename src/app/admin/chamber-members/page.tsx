@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import type { ChamberMember } from "@/lib/types";
 
 const categories = ["church", "ministry", "speaker", "gods_chosen", "business"];
@@ -84,7 +83,6 @@ export default function ChamberMembersAdminPage() {
       <div className="mb-8 flex items-center justify-between">
         <h1 className="section-title">Chamber Members</h1>
         <div className="flex gap-3">
-          <Link href="/admin/messages" className="btn-outline-gold text-sm">Messages</Link>
           <button type="button" onClick={() => setShowForm(!showForm)} className="btn-gold text-sm">
             {showForm ? "Cancel" : "Add Member"}
           </button>

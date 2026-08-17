@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
 
 interface MessageRow {
   id: string;
@@ -46,13 +45,6 @@ export default function MessagesListPage() {
       .catch(() => setLoading(false));
   }, []);
 
-  async function handleLogout() {
-    await fetch("/api/auth/logout", { method: "POST" });
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    window.location.href = "/admin/login";
-  }
-
   function copyLink(slug: string) {
     const url = `${window.location.origin}/m/${slug}`;
     navigator.clipboard.writeText(url).then(() => {
@@ -63,17 +55,8 @@ export default function MessagesListPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-8">
         <h1 className="section-title">Messages</h1>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/admin/recipients" className="btn-outline-gold text-sm">Recipients</Link>
-          <Link href="/admin/proposals" className="btn-outline-gold text-sm">Proposals</Link>
-          <Link href="/admin/chamber-members" className="btn-outline-gold text-sm">Chamber</Link>
-          <Link href="/admin/messages/new" className="btn-gold text-sm">New Message</Link>
-          <button type="button" onClick={handleLogout} className="text-sm text-gray-400 hover:text-gold">
-            Logout
-          </button>
-        </div>
       </div>
 
       {loading ? (

@@ -10,11 +10,24 @@ export async function getAdminUser() {
   if (!user) return null;
 
   const admin = createAdminClient();
-  const { data: profile } = await admin
+  let { data: profile } = await admin
     .from("profiles")
     .select("role, full_name")
     .eq("id", user.id)
-    .single();
+    .maybeSingle();
+
+  if (!profile) {
+    const { data: created } = await admin
+      .from("profiles")
+      .insert({
+        id: user.id,
+        full_name: user.email || "Admin",
+        role: "admin",
+      })
+      .select("role, full_name")
+      .single();
+    profile = created;
+  }
 
   if (!profile || !["admin", "editor"].includes(profile.role)) {
     return null;

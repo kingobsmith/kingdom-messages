@@ -31,7 +31,6 @@ export default function AdminProposalsPage() {
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <h1 className="section-title">Private Proposals</h1>
         <div className="flex gap-3">
-          <Link href="/admin/messages" className="btn-outline-gold text-sm">Messages</Link>
           <Link href="/admin/proposals/new" className="btn-gold text-sm">New Proposal</Link>
         </div>
       </div>

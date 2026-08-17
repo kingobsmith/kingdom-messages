@@ -25,15 +25,36 @@ export async function POST(request: NextRequest) {
     }
 
     const admin = createAdminClient();
-    const { error } = await admin.from("contact_requests").insert({
+    const payload = {
       full_name: body.fullName.trim(),
       email: body.email.trim(),
       phone: body.phone.trim(),
       who_are_you: body.whoAreYou.trim(),
       request_type: body.requestType.trim(),
       budget: body.budget?.trim() || null,
+      budget_honorarium: body.budget?.trim() || null,
       message_details: body.messageDetails.trim(),
-    });
+    };
+
+    let { error } = await admin.from("contact_requests").insert(payload);
+
+    if (error) {
+      const fallback = { ...payload };
+      delete (fallback as { budget?: string | null }).budget;
+      delete (fallback as { budget_honorarium?: string | null }).budget_honorarium;
+      const retry = await admin.from("contact_requests").insert({
+        ...fallback,
+        budget: body.budget?.trim() || null,
+      });
+      error = retry.error;
+      if (error) {
+        const retry2 = await admin.from("contact_requests").insert({
+          ...fallback,
+          budget_honorarium: body.budget?.trim() || null,
+        });
+        error = retry2.error;
+      }
+    }
 
     if (error) throw error;
     return NextResponse.json({ success: true });

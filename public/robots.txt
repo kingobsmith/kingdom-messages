@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /m/
+Disallow: /p/
+Disallow: /api/
+
+Sitemap: https://messenger.askangels.co/sitemap.xml
